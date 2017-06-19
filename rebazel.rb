@@ -12,6 +12,6 @@ class Rebazel < Formula
   end
 
   test do
-    system "true"
+    system "#{bin}/rebazel", "--version"
   end
 end

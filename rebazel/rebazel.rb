@@ -10,4 +10,8 @@ class Rebazel < Formula
   def install
     bin.install "rebazel"
   end
+
+  test do
+    system "false"
+  end
 end

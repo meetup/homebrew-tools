@@ -1,8 +1,21 @@
 # Homebrew tools
 
-Formule for installing some tools on osx
+Formule for installing tools on osx
 
-```bash
+```sh
+$ brew tap meetup/tools
+```
+
+## rebazel
+
+```sh
 # (optional) brew update
-$ brew install meetup/tools/rebazel
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install rebazel
+```
+
+## stack-tail
+
+```sh
+# (optional) brew update
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install stack-tail
 ```

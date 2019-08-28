@@ -6,6 +6,13 @@ Formule for installing tools on osx
 $ brew tap meetup/tools
 ```
 
+## git-linecat
+
+```sh
+# (optional) brew update
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install git-linecat
+```
+
 ## rebazel
 
 ```sh

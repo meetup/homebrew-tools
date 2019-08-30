@@ -13,6 +13,13 @@ $ brew tap meetup/tools
 $ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install git-linecat
 ```
 
+## ivy-dated
+
+```sh
+# (optional) brew update
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install ivy-dated
+```
+
 ## rebazel
 
 ```sh

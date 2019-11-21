@@ -1,4 +1,4 @@
-class MobTimer < Formula
+cask 'mob-timer' do
   version '1.6.4'
   sha256 '3414402437dedd36f73f20df49690bc90f5789fe131635ded9023ad9682e9205'
 

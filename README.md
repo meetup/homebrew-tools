@@ -1,35 +1,44 @@
-# Homebrew tools
+# Homebrew tools <!-- omit in toc -->
 
-Formule for installing tools on osx
+Formule for installing meetup tools on osx
 
-```sh
-$ brew tap meetup/tools
-```
+- [git-linecat](#git-linecat)
+- [ivy-dated](#ivy-dated)
+- [rebazel](#rebazel)
+- [stack-tail](#stack-tail)
+- [mob-timer](#mob-timer)
 
 ## git-linecat
 
 ```sh
 # (optional) brew update
-$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install git-linecat
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install meetup/homebrew-tools/git-linecat
 ```
 
 ## ivy-dated
 
 ```sh
 # (optional) brew update
-$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install ivy-dated
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install meetup/homebrew-tools/ivy-dated
 ```
 
 ## rebazel
 
 ```sh
 # (optional) brew update
-$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install rebazel
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install meetup/homebrew-tools/rebazel
 ```
 
 ## stack-tail
 
 ```sh
 # (optional) brew update
-$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install stack-tail
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew install meetup/homebrew-tools/stack-tail
+```
+
+## mob-timer
+
+```sh
+# (optional) brew update
+$ HOMEBREW_NO_INSTALL_CLEANUP=1 brew cask install meetup/homebrew-tools/mob-timer
 ```

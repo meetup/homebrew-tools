@@ -1,0 +1,43 @@
+name: Building
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/building.yml
+      - 'Formula/*'
+
+env:
+  HOMEBREW_BINTRAY_URL: https://dl.bintray.com/meetup/bottles-tap
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Update Homebrew
+        run: brew update-reset
+      - name: Checkout tap
+        uses: actions/checkout@v2
+      - name: Setup tap
+        run: |
+          mkdir -p $(dirname $(brew --repo $GITHUB_REPOSITORY))
+          ln -s $PWD $(brew --repo $GITHUB_REPOSITORY)
+      - name: Build bottles
+        run: |
+          mkdir ~/bottles
+          cd ~/bottles
+          brew test-bot --root-url=$HOMEBREW_BINTRAY_URL --only-formulae
+      - name: Move bottles
+        if: always()
+        run: mv ~/bottles $PWD
+      - name: Upload bottles
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: bottles
+          path: bottles

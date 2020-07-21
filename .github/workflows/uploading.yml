@@ -1,0 +1,64 @@
+name: Uploading
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/uploading.yml
+      - 'Formula/*'
+
+env:
+  HOMEBREW_BINTRAY_REPO: bottles-tap
+  HOMEBREW_BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+  HOMEBREW_BINTRAY_KEY: ${{ secrets.BINTRAY_PASS }}
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Homebrew
+        run: brew update-reset
+      - name: Checkout tap
+        uses: actions/checkout@v2
+      - name: Setup tap
+        run: |
+          mkdir -p $(dirname $(brew --repo $GITHUB_REPOSITORY))
+          ln -s $PWD $(brew --repo $GITHUB_REPOSITORY)
+      - name: Setup git
+        uses: Homebrew/actions/git-user-config@master
+        with:
+          username: github-actions[bot]
+      - name: Find PR
+        uses: jwalton/gh-find-current-pr@v1
+        id: pr
+        with:
+          github-token: ${{github.token}}
+      - name: Download bottles
+        if: steps.pr.outputs.number != ''
+        uses: Homebrew/actions/download-artifact@master
+        with:
+          pr: ${{steps.pr.outputs.number}}
+          workflow: building.yml
+          name: bottles
+      - name: Create packages
+        if: steps.pr.outputs.number != ''
+        run: |
+          for package in $(ls -1 *.bottle.json | awk -F '--' '{print $1}' | uniq | tr '@' ':' | tr '+' 'x'); do
+            curl \
+              --user $HOMEBREW_BINTRAY_USER:$HOMEBREW_BINTRAY_KEY \
+              --header "Content-Type: application/json" \
+              --data " \
+                {\"name\": \"$package\", \
+                \"vcs_url\": \"$GITHUB_REPOSITORY\", \
+                \"licenses\": [\"MIT\"], \
+                \"public_download_numbers\": true, \
+                \"public_stats\": true \
+                }" \
+              https://api.bintray.com/packages/$HOMEBREW_BINTRAY_USER/$HOMEBREW_BINTRAY_REPO || true
+          done
+      - name: Upload bottles
+        if: steps.pr.outputs.number != ''
+        run: brew pr-upload --bintray-org=$HOMEBREW_BINTRAY_USER
+      - name: Push commits
+        uses: Homebrew/actions/git-try-push@master

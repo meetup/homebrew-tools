@@ -1,0 +1,24 @@
+name: Checking
+
+on:
+  schedule:
+    # Every 24 hours
+    - cron: '0 */24 * * *'
+  repository_dispatch:
+    types:
+      - check
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Homebrew
+        run: brew update-reset
+      - name: Checkout tap
+        uses: actions/checkout@v2
+      - name: Setup tap
+        run: |
+          mkdir -p $(dirname $(brew --repository $GITHUB_REPOSITORY))
+          ln -s $PWD $(brew --repository $GITHUB_REPOSITORY)
+      - name: Check style
+        run: brew style $GITHUB_REPOSITORY

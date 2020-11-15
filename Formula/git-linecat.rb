@@ -5,8 +5,6 @@ class GitLinecat < Formula
   sha256 "7673035f58c393e5cff06f8d6956270cc83e823287b883a1d1ae908fe2b5cfe9"
   version "v0.0.0"
 
-  bottle :unneeded
-
   def install
     bin.install "git-linecat"
   end

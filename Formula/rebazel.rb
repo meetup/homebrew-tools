@@ -5,8 +5,6 @@ class Rebazel < Formula
   sha256 "50fee6e3963865d069d908f1545bc04dc501d752d5936558ea8bd5f785210c5f"
   version "v0.1.4"
 
-  bottle :unneeded
-
   def install
     bin.install "rebazel"
   end

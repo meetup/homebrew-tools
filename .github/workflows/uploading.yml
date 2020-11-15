@@ -11,7 +11,7 @@ on:
 env:
   HOMEBREW_BINTRAY_REPO: bottles-tap
   HOMEBREW_BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
-  HOMEBREW_BINTRAY_KEY: ${{ secrets.BINTRAY_PASS }}
+  HOMEBREW_BINTRAY_KEY: ${{ secrets.HOMEBREW_BINTRAY_KEY }}
 
 jobs:
   upload:

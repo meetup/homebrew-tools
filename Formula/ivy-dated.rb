@@ -5,8 +5,6 @@ class IvyDated < Formula
   sha256 "8669ec8e532d19073d31bb1d9f6c872347c3352909c4d938037f01a3470d070e"
   version "v0.0.0"
 
-  bottle :unneeded
-
   def install
     bin.install "ivy-dated"
   end
